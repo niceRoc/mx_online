@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for Mx_Online project.
 
@@ -11,9 +12,13 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 配置apps的搜索路径
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,7 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',  # 用户模块
+    'courses',  # 课程模块
+    'organization',  # 课程机构模块
+    'operation',  # 用户操作模块
 ]
+
+# 因为用户模块中UserProfiles模型类继承了Django默认的用户模型类,所以需要重载setting方法
+# 指定的模型类名: 应用名.模型类名
+AUTH_USER_MODEL = 'users.UserProfiles'  # 指定
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
