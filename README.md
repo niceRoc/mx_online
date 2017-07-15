@@ -29,4 +29,4 @@
 + 4.5 UserMessage - 用户消息
 + 4.6 UserCourse - 用户学习的课程
 
-#### [来源于:](http://coding.imooc.com/class/78.html)
+#### 来源于: [慕课网](http://coding.imooc.com/class/78.html)
