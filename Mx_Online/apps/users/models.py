@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 
 # 第一块区域引用Python内部的模块
+from __future__ import unicode_literals
 from datetime import datetime
 
 # 第二快区域引用第三方的模块
@@ -38,7 +38,7 @@ class UserProfiles(AbstractUser):
     birthday = models.DateField(verbose_name=u"生日", null=True, blank=True)
     # choices一个二维元组组合,多项选择集合  默认是选择框形式显示在后台,默认添加的性别为男生
     gender = models.CharField(
-        verbose_name=u"性别",  max_length=5, choices=(('male', u'男'), ('female', u'女')), default='male'
+        verbose_name=u"性别",  max_length=6, choices=(('male', u'男'), ('female', u'女')), default='male'
     )
     address = models.CharField(verbose_name=u"地区", max_length=100, default="")
     mobile = models.CharField(verbose_name=u"手机号", max_length=11, null=True, blank=True)
@@ -68,6 +68,9 @@ class EmailVerifyRecord(models.Model):
     # 如果加上括号,此字段就不会按照在对象实例化时的时间来进行复制,而是按照这个模型类编译的时间赋值
     send_time = models.DateTimeField(verbose_name=u"发送时间", default=datetime.now, max_length=10)
 
+    def __unicode__(self):
+        return '{0}({1})'.format(self.code, self.email)
+
     class Meta:
         verbose_name = u"邮箱验证码"
         verbose_name_plural = verbose_name
@@ -84,3 +87,6 @@ class Banner(models.Model):
     class Meta:
         verbose_name = u"轮播图"
         verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return self.title

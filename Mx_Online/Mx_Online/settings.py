@@ -20,6 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 配置apps的搜索路径
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
+# 配置extra_apps的搜索路径
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
     'courses',  # 课程模块
     'organization',  # 课程机构模块
     'operation',  # 用户操作模块
+    'xadmin',
+    'crispy_forms',  # xadmin功能实现的依赖应用
 ]
 
 # 因为用户模块中UserProfiles模型类继承了Django默认的用户模型类,所以需要重载setting方法
@@ -130,7 +135,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False  # True
 
 
 # Static files (CSS, JavaScript, Images)

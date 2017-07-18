@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from datetime import datetime
 
 from django.db import models
@@ -68,6 +67,9 @@ class UserMessage(models.Model):
         verbose_name = u"用户消息"
         verbose_name_plural = verbose_name
 
+    def __unicode__(self):
+        return self.message
+
 
 class UserCourse(models.Model):
     user = models.ForeignKey(UserProfiles, verbose_name=u"用户")
@@ -75,5 +77,8 @@ class UserCourse(models.Model):
     add_time = models.DateTimeField(verbose_name=u"添加时间", default=datetime.now)
 
     class Meta:
-        verbose_name = u"用户所学课程"
+        verbose_name = u"所学课程"
         verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return self.course.name
