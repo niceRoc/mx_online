@@ -38,18 +38,23 @@ class UserProfiles(AbstractUser):
     birthday = models.DateField(verbose_name=u"生日", null=True, blank=True)
     # choices一个二维元组组合,多项选择集合  默认是选择框形式显示在后台,默认添加的性别为男生
     gender = models.CharField(
-        verbose_name=u"性别",  max_length=6, choices=(('male', u'男'), ('female', u'女')), default='male'
+        verbose_name=u"性别",  max_length=6,
+        choices=(('male', u'男'), ('female', u'女')), default='male'
     )
     address = models.CharField(verbose_name=u"地区", max_length=100, default="")
-    mobile = models.CharField(verbose_name=u"手机号", max_length=11, null=True, blank=True)
+    mobile = models.CharField(
+        verbose_name=u"手机号", max_length=11, null=True, blank=True
+    )
     # 用户上传的头像 地址默认存储:images/年份/月份/日期,  没有上传则默认使用静态文件的一张图片地址
     image = models.ImageField(
-        verbose_name=u"头像", upload_to="images/%Y/%m/%d", default=u"images/default.png", max_length=100
+        verbose_name=u"头像", upload_to="images/%Y/%m/%d",
+        default=u"images/default.png", max_length=100
     )
 
     class Meta:
         verbose_name = u"用户信息"
-        verbose_name_plural = verbose_name  # verbose_name的复数形式,如果不指定 值为:verbose_name的值加上一个s
+        # verbose_name的复数形式,如果不指定 值为:verbose_name的值加上一个
+        verbose_name_plural = verbose_name
 
     def __unicode__(self):
         return self.username  # 返回父类中的username字段值
@@ -66,7 +71,9 @@ class EmailVerifyRecord(models.Model):
     )
     # datetime.now需要去掉()
     # 如果加上括号,此字段就不会按照在对象实例化时的时间来进行复制,而是按照这个模型类编译的时间赋值
-    send_time = models.DateTimeField(verbose_name=u"发送时间", default=datetime.now, max_length=10)
+    send_time = models.DateTimeField(
+        verbose_name=u"发送时间", default=datetime.now, max_length=10
+    )
 
     def __unicode__(self):
         return '{0}({1})'.format(self.code, self.email)
